@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Language Detection By Kavan Alipanahi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Styling for the header */
+        h1 {
+            color: #00539C; /* Dark blue */
+            font-size: 28px;
+            text-align: center;
+            margin-top: 20px;
+            white-space: nowrap; /* Prevents text from wrapping */
+            overflow: hidden; /* Hides any overflow */
+        }
+
+        /* Responsive font size for the header */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+        /* Styling for the main container */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for the textarea */
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        /* Styling for the detect button */
+        #detectButton {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Hover effect for the detect button */
+        #detectButton:hover {
+            background-color: #45a049;
+        }
+
+        /* Styling for the result paragraph */
+        #result {
+            color: #E51A4C; /* Red */
+            font-size: 18px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Language Detection By Kavan Alipanahi</h1>
+        <textarea id="inputText" placeholder="Enter your text here"></textarea>
+        <button id="detectButton">Detect Language</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const detectButton = document.getElementById('detectButton');
+        const inputText = document.getElementById('inputText');
+        const resultElement = document.getElementById('result');
+
+        detectButton.addEventListener('click', () => {
+            const text = inputText.value;
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "text": text })
+            })
+            .then(response => response.json())
+            .then(data => {
+                resultElement.textContent = `Detected Language: ${data.language}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+
+</html>
