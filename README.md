@@ -14,7 +14,7 @@ The FastAPI app was dockerized using the provided Dockerfile. This ensures that 
 
 ## Deployment
 The dockerized app is deployed on [Liara](https://liara.ir/), a platform that simplifies the deployment of web applications. It provides a seamless hosting solution for running the language detection app.
-You follow [this](https://docs.liara.ir/app-deploy/docker/cli) insturnction to create your own API.
+You follow [this](https://docs.liara.ir/app-deploy/docker/cli) instruction to create your own API.
 
 
 
